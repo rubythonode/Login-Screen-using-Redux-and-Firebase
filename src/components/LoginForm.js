@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {Text} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 import { Card, Input, Button, CardSection,Spinner } from "./common";
 import { emailChanged, passwordChanged,loginUser } from "../actions";
 
@@ -24,8 +25,6 @@ class Loginform extends Component {
         <Button children="Login / Signup"
         onPress = {this.onButtonPress.bind(this)} />
       );
-    
-
   }
   render() {
     return (
@@ -34,7 +33,10 @@ class Loginform extends Component {
           <Input
             label="Email ID"
             onChangeText={this.onEmailChange.bind(this)}
-            value={this.props.email}/>
+            value={this.props.email}
+            placeHolder = "Enter Email ID"
+            keyboardType = "email-address"
+            returnKeyType = "next"/>
         </CardSection>
 
         <CardSection>
@@ -42,14 +44,18 @@ class Loginform extends Component {
             label="Password"
             secureTextEntry
             onChangeText={this.onPasswordChanged.bind(this)}
-            value={this.props.password}/>
+            value={this.props.password}
+            returnKeyType = "done"
+            placeHolder = "Enter Password"/>
         </CardSection>
         <Text style = {Styles.errorTextMessage}> 
           {this.props.error}
         </Text>
         <CardSection>
-          
           {this.renderButton()}
+          {/* <Button
+          children = "Login / SignUp"
+          onPress = {() => Actions.main()}/> */}
         </CardSection>
       </Card>
     );
